@@ -1,20 +1,23 @@
 import path from "path";
+import { fileURLToPath } from "url";
+import express from "express"; // ❗fixed import
 import { createServer } from "./index";
-import * as express from "express";
+
+// ✅ Fix __dirname manually
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// ✅ Define dist path correctly
+const distPath = path.join(__dirname, "../spa");
 
 const app = createServer();
 const port = process.env.PORT || 3000;
 
-// In production, serve the built SPA files
-const __dirname = import.meta.dirname;
-const distPath = path.join(__dirname, "../spa");
-
-// Serve static files
+// ✅ Serve static files
 app.use(express.static(distPath));
 
-// Handle React Router - serve index.html for all non-API routes
+// ✅ React Router fallback for non-API routes
 app.get("*", (req, res) => {
-  // Don't serve index.html for API routes
   if (req.path.startsWith("/api/") || req.path.startsWith("/health")) {
     return res.status(404).json({ error: "API endpoint not found" });
   }
@@ -28,7 +31,7 @@ app.listen(port, () => {
   console.log(`🔧 API: http://localhost:${port}/api`);
 });
 
-// Graceful shutdown
+// ✅ Graceful shutdown
 process.on("SIGTERM", () => {
   console.log("🛑 Received SIGTERM, shutting down gracefully");
   process.exit(0);
