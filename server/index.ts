@@ -321,18 +321,14 @@ const allowedOrigins = [
 app.use(
   cors({
     origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        console.log("❌ CORS blocked for origin:", origin);
-        callback(new Error("Not allowed by CORS"));
-      }
+      callback(null, true); // ← temporarily allow all origins
     },
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
+
 
 
   app.use(express.json({ limit: "10mb" }));
