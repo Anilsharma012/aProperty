@@ -2,7 +2,7 @@ import { MongoClient, Db } from "mongodb";
 
 // URL encode the password to handle special characters
 const username = "Aashishpropeorty";
-const password = "ANILSHARMA"; // Using the exact password provided
+const password = "SATYAKA123"; // Using the exact password provided
 const cluster = "property.zn2cowc.mongodb.net";
 
 const MONGODB_URI =
