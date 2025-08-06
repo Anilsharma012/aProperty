@@ -60,13 +60,8 @@
       "name": "Search Properties",
       "short_name": "Search",
       "description": "Search for properties",
-      "url": "/search",
-      "icons": [
-        {
-          "src": "/favicon.ico",
-          "sizes": "96x96"
-        }
-      ]
+      "url": "/search"
+    
     }
   ]
 }
