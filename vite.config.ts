@@ -3,16 +3,15 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { createServer } from "./server";
 
-// ✅ Define Vite config
+// ✅ Final working config
 export default defineConfig(({ command }) => {
   const isDev = command === "serve";
 
   return {
-    root: "client", // ✅ So Vite looks for index.html inside /client
     plugins: [react(), isDev ? expressPlugin() : undefined].filter(Boolean),
 
     build: {
-      outDir: "dist", // ✅ This will generate client/dist
+      outDir: "client/dist", // ✅ Output still goes to client/dist for Netlify
       emptyOutDir: true,
     },
 
@@ -24,17 +23,16 @@ export default defineConfig(({ command }) => {
     },
 
     server: {
-      host: "::",
       port: 5173,
     },
   };
 });
 
-// ✅ Express plugin only for dev
+// ✅ Dev plugin (Express middleware for dev)
 function expressPlugin(): Plugin {
   return {
     name: "express-plugin",
-    apply: "serve", // Only apply during dev
+    apply: "serve",
     configureServer(server) {
       const app = createServer();
       server.middlewares.use(app);
