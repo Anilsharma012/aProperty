@@ -1233,17 +1233,4 @@ export function createServer() {
 }
 
 // For production
-if (import.meta.url === `file://${process.argv[1]}`) {
-  const app = createServer();
-  const httpServer = createServer(app);
 
-  // Initialize WebSocket server
-  const chatWs = new ChatWebSocketServer(httpServer);
-  console.log("🔌 WebSocket server initialized");
-
-  const port = process.env.PORT || 3000;
-  httpServer.listen(port, () => {
-    console.log(`🚀 Server running on port ${port}`);
-    console.log(`📱 WebSocket available at ws://localhost:${port}/ws/chat`);
-  });
-}
