@@ -312,27 +312,30 @@ import { testFooterData } from "./routes/footerTest";
 export function createServer() {
   const app = express();
 
-  // Middleware
-const allowedOrigins = [
-  "https://aproperty.netlify.app",
-  "http://localhost:5173", // For local development
-];
+ const allowedOrigins = [
+    "https://aproperty.netlify.app",
+    "http://localhost:5173"
+  ];
 
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      callback(null, true); // ← temporarily allow all origins
-    },
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
+  app.use(
+    cors({
+      origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+          callback(null, true);
+        } else {
+          console.log("❌ CORS blocked for origin:", origin);
+          callback(new Error("Not allowed by CORS"));
+        }
+      },
+      credentials: true,
+      methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+      allowedHeaders: ["Content-Type", "Authorization"],
+    })
+  );
 
 
-
-  app.use(express.json({ limit: "10mb" }));
-  app.use(express.urlencoded({ extended: true, limit: "10mb" }));
+  app.use(express.json({ limit: "1gb" }));
+  app.use(express.urlencoded({ extended: true, limit: "1gb" }));
 
   // Initialize MongoDB connection
   connectToDatabase()
