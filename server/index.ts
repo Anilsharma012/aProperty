@@ -313,7 +313,7 @@ export function createServer() {
   const app = express();
 
  const allowedOrigins = [
-    "https://aproperty.netlify.app",
+     "https://aproperty.netlify.app",
     "http://localhost:5173"
   ];
 
