@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import { createServer } from "http";
+
 import { connectToDatabase, getDatabase } from "./db/mongodb";
 import { authenticateToken, requireAdmin } from "./middleware/auth";
 import { ChatWebSocketServer } from "./websocket";
@@ -16,7 +16,7 @@ import {
   markUserNotificationAsRead,
   deleteUserNotification,
   getPendingProperties,
-  updatePropertyApproval,
+  // updatePropertyApproval,
   upload,
 } from "./routes/properties";
 
@@ -198,14 +198,7 @@ import {
 } from "./routes/content";
 
 // Homepage slider routes
-import {
-  getHomepageSliders,
-  getAdminHomepageSliders,
-  createHomepageSlider,
-  updateHomepageSlider,
-  deleteHomepageSlider,
-  initializeHomepageSliders,
-} from "./routes/homepage-sliders";
+
 
 // Database test routes
 import {
@@ -244,6 +237,7 @@ import {
 import {
   getHomepageSliders,
   getActiveHomepageSliders,
+
   createHomepageSlider,
   updateHomepageSlider,
   toggleSliderStatus,
