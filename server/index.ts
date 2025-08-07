@@ -198,7 +198,14 @@ import {
 } from "./routes/content";
 
 // Homepage slider routes
-
+// import {
+//   getHomepageSliders,
+//   getAdminHomepageSliders,
+//   createHomepageSlider,
+//   updateHomepageSlider,
+//   deleteHomepageSlider,
+//   initializeHomepageSliders,
+// } from "./routes/homepage-sliders";
 
 // Database test routes
 import {
@@ -237,12 +244,12 @@ import {
 import {
   getHomepageSliders,
   getActiveHomepageSliders,
-
   createHomepageSlider,
   updateHomepageSlider,
   toggleSliderStatus,
   deleteHomepageSlider,
   initializeDefaultSlider,
+  //  initializeHomepageSliders
 } from "./routes/homepage-slider";
 
 // Bank transfer routes
@@ -495,12 +502,12 @@ export function createServer() {
 
   // Homepage slider routes
   app.get("/api/homepage-sliders", getHomepageSliders);
-  app.post("/api/homepage-sliders/initialize", initializeHomepageSliders);
+  // app.post("/api/homepage-sliders/initialize", initializeHomepageSliders);
   app.get(
     "/api/admin/homepage-sliders",
     authenticateToken,
     requireAdmin,
-    getAdminHomepageSliders,
+    // getAdminHomepageSliders,
   );
   app.post(
     "/api/admin/homepage-sliders",
